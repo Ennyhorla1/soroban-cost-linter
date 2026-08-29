@@ -1,13 +1,13 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, BytesN, Env, Vec};
+use soroban_sdk::{contract, contractimpl, Bytes, BytesN, Env};
 
 #[contract]
-pub struct CryptoInLoopFixedContract;
+pub struct CryptoInLoopFixed;
 
 #[contractimpl]
-impl CryptoInLoopFixedContract {
-    pub fn verify_fixed(env: Env, items: Vec<(BytesN<32>, BytesN<32>, BytesN<64>)>) {
-        for (pk, msg, sig) in items.iter() {
+impl CryptoInLoopFixed {
+    pub fn verify_loop(env: Env, pk: BytesN<32>, msg: Bytes, sig: BytesN<64>) {
+        for _ in 0..5 {
             env.crypto().ed25519_verify(&pk, &msg, &sig);
         }
     }
