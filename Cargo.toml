@@ -31,5 +31,8 @@ exclude = [
     "tests/corpus/contracts/memory_payload_serializer",
     "tests/corpus/contracts/memory_input_decoder",
     "tests/corpus/contracts/memory_clean_processor",
+    "tests/corpus/contracts/bad_instance_storage",
+    "tests/corpus/contracts/good_fixed_instance_storage",
+    "tests/corpus/contracts/good_persistent_storage",
 ]
 resolver = "2"
