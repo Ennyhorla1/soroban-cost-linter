@@ -2,7 +2,10 @@
 members = [
     "soroban_cost_lints",
     "cargo-cost-lint",
-    "tools/generate-lint-docs"
+    "tools/generate-lint-docs",
+    "tests/corpus/contracts/panic_formatted",
+    "tests/corpus/contracts/panic_in_test_mod",
+    "tests/corpus/contracts/panic_with_contracterror"
 ]
 exclude = [
     "soroban_cost_lints/test_fixtures/real_sdk",
