@@ -21,6 +21,21 @@ pub mod soroban_sdk {
 
 use soroban_sdk::Env;
 
+#[inline(always)]
+fn get_ledger_sequence(env: &Env) -> u32 {
+    env.ledger().sequence()
+}
+
+#[inline(always)]
+fn get_ledger_timestamp(env: &Env) -> u64 {
+    env.ledger().timestamp()
+}
+
+#[inline(always)]
+fn get_ledger_network_id(env: &Env) -> [u8; 32] {
+    env.ledger().network_id()
+}
+
 // =======================================================================
 // ledger_context_read_in_loop — Fixtures
 // =======================================================================
@@ -29,36 +44,36 @@ use soroban_sdk::Env;
 
 fn bad_sequence_in_for_loop(env: Env) {
     for _ in 0..10 {
-        let _seq = env.ledger().sequence(); // Should Warn
+        let _seq = get_ledger_sequence(&env); // Should Warn
     }
 }
 
 fn bad_timestamp_in_while_loop(env: Env) {
     let mut i = 0;
     while i < 10 {
-        let _ts = env.ledger().timestamp(); // Should Warn
+        let _ts = get_ledger_timestamp(&env); // Should Warn
         i += 1;
     }
 }
 
 fn bad_sequence_in_loop_loop(env: Env) {
     loop {
-        let _seq = env.ledger().sequence(); // Should Warn
+        let _seq = get_ledger_sequence(&env); // Should Warn
         break;
     }
 }
 
 fn bad_network_id_in_closure(env: Env) {
     (0..5).for_each(|_| {
-        let _nid = env.ledger().network_id(); // Should Warn
+        let _nid = get_ledger_network_id(&env); // Should Warn
     });
 }
 
 fn bad_all_accessors_in_loop(env: Env) {
     for _ in 0..3 {
-        let _seq = env.ledger().sequence(); // Should Warn
-        let _ts = env.ledger().timestamp(); // Should Warn
-        let _nid = env.ledger().network_id(); // Should Warn
+        let _seq = get_ledger_sequence(&env); // Should Warn
+        let _ts = get_ledger_timestamp(&env); // Should Warn
+        let _nid = get_ledger_network_id(&env); // Should Warn
     }
 }
 
